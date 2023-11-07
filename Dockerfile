@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Create a dummy "next-build" script in package.json
-RUN echo '{ "scripts": { "next-build": "next build && touch .next/__build_finished__" } }' > package.json
+RUN echo '{ "scripts": { "next-build": "next build" } }' > package.json
 
 # Build the Next.js application using the custom script
 RUN npm run next-build
