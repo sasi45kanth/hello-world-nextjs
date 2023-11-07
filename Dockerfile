@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Create a dummy "next-build" script in package.json
-RUN echo '{ "scripts": { "next-build": "next build" } }' > package.json
+RUN echo '{ "scripts": { "next-build": "NODE_OPTIONS=--max_old_space_size=1024 next build" } }' > package.json
 
 # Build the Next.js application using the custom script
 RUN npm run next-build
