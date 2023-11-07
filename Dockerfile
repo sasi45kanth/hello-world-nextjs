@@ -12,6 +12,9 @@ RUN npm install
 # Copy the rest of the application source code to the container
 COPY . .
 
+# Modify the package.json to prevent SSR issues (if not already done)
+RUN sed -i 's/"next build": "next build",/"next build": "next build && touch .next/__build_finished__",/' package.json
+
 # Build the Next.js application
 RUN npm run build
 
