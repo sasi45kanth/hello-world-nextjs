@@ -12,11 +12,11 @@ RUN npm install
 # Copy the rest of the application source code to the container
 COPY . .
 
-# Modify the package.json to prevent SSR issues (if not already done)
-RUN sed -i 's/"next build": "next build",/"next build": "next build && touch .next/__build_finished__",/' package.json
+# Create a dummy "next-build" script in package.json
+RUN echo '{ "scripts": { "next-build": "next build && touch .next/__build_finished__" } }' > package.json
 
-# Build the Next.js application
-RUN npm run build
+# Build the Next.js application using the custom script
+RUN npm run next-build
 
 # Stage 2: Create the final lightweight image for runtime
 FROM node:14
